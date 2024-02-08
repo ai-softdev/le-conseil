@@ -10,6 +10,8 @@ import './Practice.css'
 import Arrow from '/src/assets/img/icons/arrow.svg'
 import PracticeImg from '/src/assets/img/block/img-block-three.png'
 import PracticeSlide from "./PracticeSlide.jsx";
+import {motion} from "framer-motion";
+import {useSelector} from "react-redux";
 
 const Practice = () => {
   const [practice, setPractice] = useState([
@@ -56,6 +58,7 @@ const Practice = () => {
       linkUrl: '/'
     },
   ])
+  const practiceList = useSelector(state => state.practic)
   const navPrev = useRef(null)
   const navNext = useRef(null)
   return (
@@ -93,14 +96,17 @@ const Practice = () => {
                     1100: {
                       slidesPerView: 3,
                       spaceBetween: 80,
+                      pagination: false
                     },
                     1400: {
                       slidesPerView: 4,
-                      spaceBetween: 100
+                      spaceBetween: 100,
+                      pagination: false
                     },
                     1536: {
                       slidesPerView: 4,
-                      spaceBetween: 30
+                      spaceBetween: 30,
+                      pagination: false
                     }
                   }}
                   navigation={{
@@ -114,22 +120,21 @@ const Practice = () => {
                   }}
           >
 
-            {practice.map(item =>
+            {practiceList.practicData.data?.map(item =>
               <SwiperSlide key={item.id}>
-                <PracticeSlide description={item.description} img={item.img} date={item.date} link={false}
-                               linkUrl={item.linkUrl}/>
+                <PracticeSlide props={...item} descriptionStyle={'text-white'} linkUrl={item.id}/>
               </SwiperSlide>
             )
             }
             <SwiperSlide className={'mx-auto flex justify-center w-full'}>
-              <PracticeSlide link={'true'} linkTitle={'Подробнее'} linkUrl={'/practice'}></PracticeSlide>
+              <PracticeSlide link={'true'} linkTitle={'Подробнее'} linkUrl={' '}></PracticeSlide>
             </SwiperSlide>
           </Swiper>
           <button ref={navNext} className={'max-md:w-full my-auto max-sm:hidden'}>
             <img src={Arrow} className={'rotate-180'} alt=""/>
           </button>
         </div>
-          <div id="containerForBullets" className={'flex justify-center gap-x-3'}></div>
+        <div id="containerForBullets" className={'flex justify-center gap-x-3'}></div>
       </div>
     </div>
   );

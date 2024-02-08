@@ -1,69 +1,36 @@
-import React, {useRef, useState} from 'react';
-import BlockImage from '/src/assets/img/block/img-block-one.png'
+import React, {useEffect, useRef, useState} from 'react';
 import {CSSTransition} from "react-transition-group";
 import './ServiceBlock.css'
 import {t} from 'i18next'
+import {useSelector} from "react-redux";
+import axios from "../../../composables/axios.js";
+import {Link} from "react-router-dom";
 const ServicesBlock = () => {
-  const [services, setServices] = useState([
-    {
-      id: 0,
-      title: 'Судебно-претензионная работа',
-      img: BlockImage
-    },
-    {
-      id: 1,
-      title: 'Альтернативное урегулирование споров',
-      img: ''
-    },
-    {
-      id: 2,
-      title: 'Сопровождение исполнительного производства',
-      img: ''
-    },
-    {
-      id: 3,
-      title: 'Интеллектуальная собственность',
-      img: ''
-    },
-    {
-      id: 4,
-      title: 'Сопровождение сделок',
-      img: ''
-    },
-    {
-      id: 5,
-      title: 'Лицензирование',
-      img: ''
-    },
-    {
-      id: 6,
-      title: 'Слияния и поглощения',
-      img: ''
-    },
-    {
-      id: 7,
-      title: 'Трудовое право и кадровое сопровождение',
-      img: ''
-    },
-  ])
   const [mouseMove, setMouseMove] = useState(null)
   const nodeRef = useRef(null)
+  const services = useSelector(state => state.service)
   return (
     <div className={'flex flex-wrap gap-6 w-full justify-center mx-auto'}>
-      {services.map(item =>
-        <button key={item.id} onMouseEnter={()=> setMouseMove(item.id)} onMouseLeave={()=>setMouseMove(null)}
-                className={`flex hover:text-white items-center relative justify-center border rounded-xl px-4 w-[410px] h-[150px] uppercase break-words`}>
-          <p className={`text-lg font-evolventaRegular `}>{item.title}</p>
-             <CSSTransition in={item.id === mouseMove} nodeRef={nodeRef} unmountOnExit timeout={100} classNames={'blockStyle'} >
-               <div ref={nodeRef} className={'!bg-green-900'}>
-                 <img className={'absolute h-full w-full rounded-xl left-0 top-0 -z-10 bg-opacity-0 bg-black'} src={BlockImage} alt=""/>
-               </div>
-             </CSSTransition>
-        </button>
+      {services.serviceData.data?.map(item =>
+        item.type === 'physical'
+        ?
+        <Link to={`/services/${item.id}`} key={item.id} onMouseEnter={() => setMouseMove(item.id)} onMouseLeave={() => setMouseMove(null)}
+              className={`flex hover:text-white transition-all items-center relative justify-center border rounded-xl px-4 w-[410px] h-[150px] uppercase break-words`}>
+          <p className={`text-lg font-evolventaRegular`}>{item.title[0].ru || item.title[0].uz || item.title[0].en}</p>
+          <CSSTransition in={item.id === mouseMove} nodeRef={nodeRef} unmountOnExit timeout={100}
+                         classNames={'blockStyle'}>
+            <div ref={nodeRef} className={''}>
+              <div className={'absolute h-full w-full bg-black top-0 left-0 opacity-40 -z-10 rounded-xl'}></div>
+              <img className={'absolute h-full w-full rounded-xl left-0 top-0 -z-20'}
+                   src={axios.getUri() + 'storage/' + item.image} alt=""/>
+            </div>
+          </CSSTransition>
+        </Link>
+          : <></>
       )}
-      <button className={'w-[410px] h-[150px] underline uppercase text-titleLactic text-lg hover:text-subtitleLactic'}>
-        {t('Перейти в раздел')}
-      </button>
+      <Link to={'/services'} className={'w-[410px] h-[150px] flex items-center justify-center underline uppercase text-titleLactic text-lg hover:text-subtitleLactic'}>
+         {t('Перейти в раздел')}
+      </Link>
     </div>
   );
 };

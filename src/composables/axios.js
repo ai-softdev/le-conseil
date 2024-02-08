@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: ''
+  baseURL: 'https://api-le-conseil.ai-softdev.com/'
 })

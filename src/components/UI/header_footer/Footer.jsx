@@ -17,28 +17,23 @@ const Footer = () => {
     },
     {
       id: 1,
-      name: 'Услуги',
-      link: ''
-    },
-    {
-      id: 2,
-      name: 'Отрасли',
-      link: ''
-    },
-    {
-      id: 3,
       name: 'О нас',
       link: '/about'
     },
     {
-      id: 4,
+      id: 2,
       name: 'Команда',
-      link: ''
+      link: '/team'
     },
     {
-      id: 5,
+      id: 3,
       name: 'Новости',
-      link: ''
+      link: '/news'
+    },
+    {
+      id: 3,
+      name: 'Контакты',
+      link: '/contacts'
     },
 
   ])
@@ -49,7 +44,7 @@ const Footer = () => {
           <Logo subtitle={'text-subtitleLactic'}/>
           <div className={'max-lg:justify-center max-lg:mt-6 max-lg:text-center'}>
             <nav
-              className={'text-white flex gap-x-[48px] max-lg:flex-wrap max-lg:justify-center max-lg:gap-y-5 '}>
+              className={'text-white flex gap-x-[48px] max-lg:flex-wrap max-lg:justify-center max-lg:gap-y-5 max-md:px-5 '}>
               {navList.map(navElem =>
                 <Link to={navElem.link}
                       className={`flex gap-x-2 items-center font-evolventaRegular text-lg  `}

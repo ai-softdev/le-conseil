@@ -1,30 +1,20 @@
-import React, {useEffect, useState} from 'react';
 import BlockTitle from "../UI/Other/BlockTitle.jsx";
-import {t} from 'i18next'
-import ServicesBlock from "./Services/ServicesBlock.jsx";
-import {motion} from "framer-motion";
-import {useDispatch} from "react-redux";
+import {t} from "i18next";
+import React, {useEffect, useState} from "react";
+import ServicesBlock from "../Base/Services/ServicesBlock.jsx";
+import ServicesElem from "./ServicesElem.jsx";
+import imgBlock from '/src/assets/img/block/img-block-one.png'
+import {useDispatch, useSelector} from "react-redux";
 import {loadService} from "../../store/service.js";
-
-const Services = () => {
+const ServicesContent = () => {
   const [activeElem, setActiveElem] = useState(false)
-  const blockAnimation = {
-    hidden: {
-      opacity: 0,
-      y: 100,
-    },
-    visible:custom => ({
-      opacity: 1,
-      y: 0,
-      transition: {delay: custom * 0.2}
-    })
-  }
+  const serviceList = useSelector(state => state.service)
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(loadService({page: 1, limit: 15}))
+    dispatch(loadService({page: 1, limit: 10}))
   }, [dispatch]);
   return (
-    <motion.div initial={'hidden'} whileInView={'visible'} viewport={{once: true}} className={'container mx-auto my-[100px] max-sm:my-10'}>
+    <div className={'container mx-auto my-[100px] max-sm:my-10'}>
       <div className={'flex justify-between items-center flex-wrap max-lg:justify-center max-lg:items-center max-lg:text-center gap-y-10 max-md:mx-3'}>
         <BlockTitle title={t('Наши') + ' '} titleSpan={t('услуги')}
                     titleStyle={'text-6xl max-sm:text-5xl font-timesNewRomanBold text-titleDark'}
@@ -34,11 +24,13 @@ const Services = () => {
           <button className={!activeElem ? 'border-b pl-5' : 'border-b border-titleLactic text-titleLactic pl-5 transition-all'} onClick={()=>setActiveElem(!activeElem)}>{t('Юридическим лицам')}</button>
         </div>
       </div>
-      <motion.div custom={3.3} variants={blockAnimation} className={'mt-20 max-sm:mx-3'}>
-        <ServicesBlock/>
-      </motion.div>
-    </motion.div>
+      <div className={'mt-20 max-sm:mx-3 flex flex-col gap-y-20 pb-10 max-md:gap-y-10'}>
+        {serviceList.serviceData.data?.map(item=>
+          <ServicesElem key={item.id} {...item} />
+        )}
+      </div>
+    </div>
   );
 };
 
-export default Services;
+export default ServicesContent;

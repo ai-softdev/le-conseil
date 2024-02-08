@@ -21,8 +21,12 @@ export default {
       },
       backgroundImage: {
         "subheaderBase": "url('/src/assets/img/bg/bg-one.jpg')",
-        "subheaderService": "url('/src/assets/img/bg/bg-two.png')",
-        "whyUs": "url('/src/assets/img/bg/bg-two.jpeg')"
+        "subheaderService": "url('/src/assets/img/bg/bg-two.jpeg')",
+        "whyUs": "url('/src/assets/img/bg/bg-two.jpeg')",
+        "practice": "url('/src/assets/img/bg/bg-three.jpeg')",
+        "about": "url('/src/assets/img/bg/bg-four.jpeg')",
+        "team": "url('/src/assets/img/bg/bg-five.jpeg')",
+        "news": "url('/src/assets/img/bg/bg-three.jpeg')"
       },
       fontFamily: {
         "evolventaRegular": ["EvolventaRegular", 'sans-serif'],

@@ -18,13 +18,13 @@ const Navigation = ({dropdownCheck, onClick, showBars}) => {
       id: 1,
       name: 'Услуги',
       dropdown: true,
-      link: ''
+      link: '/services'
     },
     {
       id: 2,
       name: 'Отрасли',
       dropdown: true,
-      link: ''
+      link: '/practice'
     },
     {
       id: 3,
@@ -36,13 +36,13 @@ const Navigation = ({dropdownCheck, onClick, showBars}) => {
       id: 4,
       name: 'Команда',
       dropdown: false,
-      link: ''
+      link: '/team'
     },
     {
       id: 5,
       name: 'Новости',
       dropdown: false,
-      link: ''
+      link: '/news'
     },
 
   ])
