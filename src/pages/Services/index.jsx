@@ -5,6 +5,7 @@ import Button from "../../components/UI/Other/Button.jsx";
 import BlockTitle from "../../components/UI/Other/BlockTitle.jsx";
 import ServicesContent from "../../components/Services/ServicesContent.jsx";
 import {motion} from "framer-motion";
+import Breadcrumbs from "../../components/UI/Other/Breadcrumbs.jsx";
 
 const Index = () => {
   return (
@@ -14,6 +15,7 @@ const Index = () => {
       <header className={'bg-subheaderService bg-center bg-no-repeat bg-black max-lg:bg-center bg-cover'}>
         <div className={'backdrop-invert-0 bg-black/70'}>
           <div className={'container mx-auto py-80 max-lg:py-72 max-md:pt-40 max-md:pb-10 max-md:py-0 max-md:px-4 text-white'}>
+            <Breadcrumbs prevLinkContent={t('Главная')} activeLinkContent={t('Услуги')}></Breadcrumbs>
             <div  className={'text-center w-10/12 max-lg:w-full break-words mx-auto '}>
               <BlockTitle title={'Предоставляйте идеальные решения Для любых юридических лиц'}
                           titleAnimation={true}

@@ -15,7 +15,7 @@ export const loadNews = createAsyncThunk(
 )
 
 export const loadNewsElem = createAsyncThunk(
-  'news/loadNewsEleme',
+  'news/loadNewsElem',
   async ({id}, thunkAPI) => {
     try {
       const response = await axios.get(`api/v1/news/${id}`)

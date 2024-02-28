@@ -59,8 +59,8 @@ const Practice = () => {
     },
   ])
   const practiceList = useSelector(state => state.practic)
-  const navPrev = useRef(null)
-  const navNext = useRef(null)
+  const naviNext = useRef(null)
+  const naviPrev = useRef(null)
   return (
     <div className={'bg-greenDark py-[100px] max-md:py-10'}>
       <div className={'container mx-auto '}>
@@ -71,9 +71,14 @@ const Practice = () => {
                       subtitleStyle={'text-subtitleLactic font-evolventaRegular text-2xl max-md:text-xl max-md:pt-6'}></BlockTitle>
         </div>
         <div className={'my-[100px] relative flex max-sm:flex-wrap max-sm:my-[40px]'}>
-          <button ref={navPrev} className={'max-md:w-full my-auto max-sm:hidden'}>
-            <img src={Arrow} alt=""/>
+          <button ref={naviPrev} className={'max-md:w-full my-auto max-sm:hidden '}>
+            <svg  width="100px" height="100px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none"
+                 stroke="#BA9E74">
+              <polyline points="20 24 12 32 20 40"/>
+              <line x1="52" y1="32" x2="12" y2="32"/>
+            </svg>
           </button>
+
           <Swiper className={'p-20 rounded-[10px]'}
                   slidesPerView={1}
                   pagination={{
@@ -83,6 +88,7 @@ const Practice = () => {
                     bulletActiveClass: "swiper-custom-bullet-active",
                     clickable: true,
                   }}
+                  loop={true}
                   breakpoints={{
                     640: {
                       slidesPerView: 1,
@@ -90,12 +96,13 @@ const Practice = () => {
                     },
                     768: {
                       slidesPerView: 2,
+                      spaceBetween: 80,
                       pagination: false
                     },
 
                     1100: {
                       slidesPerView: 3,
-                      spaceBetween: 80,
+                      spaceBetween: 180,
                       pagination: false
                     },
                     1400: {
@@ -110,28 +117,32 @@ const Practice = () => {
                     }
                   }}
                   navigation={{
-                    prevEl: navPrev.current,
-                    nextEl: navNext.current
+                    nextEl: naviNext.current,
+                    prevEl: naviPrev.current,
                   }}
                   modules={[Navigation, Pagination]}
                   onBeforeInit={(swiper) => {
-                    swiper.params.navigation.prevEl = navPrev.current
-                    swiper.params.navigation.nextEl = navNext.current
+                    swiper.params.navigation.nextEl = naviNext.current
+                    swiper.params.navigation.prevEl = naviPrev.current
                   }}
           >
 
             {practiceList.practicData.data?.map(item =>
               <SwiperSlide key={item.id}>
-                <PracticeSlide props={...item} descriptionStyle={'text-white'} linkUrl={item.id}/>
+                <PracticeSlide props={item} descriptionStyle={'text-white'} linkUrl={item.id} pageUrl={'practice'}/>
               </SwiperSlide>
             )
             }
             <SwiperSlide className={'mx-auto flex justify-center w-full'}>
-              <PracticeSlide link={'true'} linkTitle={'Подробнее'} linkUrl={' '}></PracticeSlide>
+              <PracticeSlide link={'true'} linkTitle={'Подробнее'} linkUrl={' '} pageUrl={'practice'}></PracticeSlide>
             </SwiperSlide>
           </Swiper>
-          <button ref={navNext} className={'max-md:w-full my-auto max-sm:hidden'}>
-            <img src={Arrow} className={'rotate-180'} alt=""/>
+          <button ref={naviNext} className={'max-md:w-full h-max my-auto max-sm:hidden  z-10'}>
+            <svg className={'rotate-180'} width="100px" height="100px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none"
+                 stroke="#BA9E74">
+              <polyline points="20 24 12 32 20 40"/>
+              <line x1="52" y1="32" x2="12" y2="32"/>
+            </svg>
           </button>
         </div>
         <div id="containerForBullets" className={'flex justify-center gap-x-3'}></div>
